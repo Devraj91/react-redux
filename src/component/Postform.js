@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-
-const store = createStore(() => [], {}, applyMiddleware());
+import store from '../store';
 export default class Postform extends Component {
     constructor(props) {
         super(props);
