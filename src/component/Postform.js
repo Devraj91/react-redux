@@ -1,19 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 
+const store = createStore(() => [], {}, applyMiddleware());
 export default class Postform extends Component {
-
     constructor(props) {
         super(props);
-        this.state = {
-          title: '',
-          body: ''
-        };
+        // this.state = {
+        //   title: '',
+        //   body: ''
+        // };
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
     }
-  
+
+    state = {
+      title: '',
+      body: ''
+    };
+    
+
     onChange(e) {
       this.setState({ [e.target.name]: e.target.value});
     }
@@ -24,6 +31,7 @@ export default class Postform extends Component {
         title: this.state.title,
         body: this.state.body
       }
+
 
       fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
@@ -39,6 +47,7 @@ export default class Postform extends Component {
 
   render() {
     return (
+      <Provider store={store}>
       <div>
         <h1>Add Posts</h1>
         <form onSubmit={this.onSubmit}>
@@ -59,6 +68,7 @@ export default class Postform extends Component {
           <button type="submit">Post</button>
         </form>
       </div>
+      </Provider>
     )
   }
 }
